@@ -1,19 +1,8 @@
 import {getUsers, getUsersbyid, addUser, delUser, updateUser } from "../helper.js";
 import express from "express";
-import { MongoClient } from "mongodb";
+import { createConnection } from "../index.js";
 
 const router=express.Router();
-
-export async function createConnection() {
-  // const MONGO_URL = process.env.MONGO_URL;
-  const MONGO_URL = "mongodb://localhost/users";
-
-  const client = new MongoClient(MONGO_URL);
-  await client.connect();
-  console.log("Successfull 💚");
-  // const insertData = await client.db("users").collec tion("people").insertMany(users);
-  return client;
-}
 
 // get users
 router.get("/", async (request, response) => {
