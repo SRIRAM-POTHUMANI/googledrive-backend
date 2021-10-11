@@ -21,7 +21,7 @@ export async function createConnection() {
 createConnection();
 
 app.get("/", (request, response) => {
-  response.send("Hello,Welcome to local env...:)");
+  response.send("Hello,Welcome to Cloud env...:)");
 });
 
 app.use("/manager", managerRouter);

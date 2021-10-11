@@ -4,6 +4,20 @@ import { createConnection } from "../index.js";
 
 const router=express.Router();
 
+<<<<<<< HEAD
+=======
+export async function createConnection() {
+  const MONGO_URL = process.env.MONGO_URL;
+//   const MONGO_URL = "mongodb://localhost/users";
+
+  const client = new MongoClient(MONGO_URL);
+  await client.connect();
+  console.log("Successfull 💚");
+  // const insertData = await client.db("users").collec tion("people").insertMany(users);
+  return client;
+}
+
+>>>>>>> eb9c66deac6fe90a5d8dcb2ef3f057c7cd5f50fe
 // get users
 router.get("/", async (request, response) => {
   // const { color, ageGt } = request.query;
