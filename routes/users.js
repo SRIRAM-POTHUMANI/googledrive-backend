@@ -1,12 +1,13 @@
 import {getUsers, getUsersbyid, addUser, delUser, updateUser } from "../helper.js";
 import express from "express";
 import { createConnection } from "../index.js";
+import { auth } from "../middleware/auth.js";
 
 const router=express.Router();
 
 
 // get users
-router.get("/", async (request, response) => {
+router.get("/", auth, async (request, response) => {
   // const { color, ageGt } = request.query;
   const client = await createConnection();
   const user = await getUsers(client);
@@ -14,14 +15,14 @@ router.get("/", async (request, response) => {
 });
 
 //get users by id from cloud
-router.get("/:id", async (request, response) => {
+router.get("/:id", auth, async (request, response) => {
   const { id } = request.params;
   const client = await createConnection();
   const user = await getUsersbyid(client, id);
   response.send(user);
 });
 //create user to cloud
-router.post("/", async (request, response) => {
+router.post("/", auth, async (request, response) => {
   const client = await createConnection();
   const addUsers = request.body;
   const result = await addUser(client, addUsers);
@@ -29,7 +30,7 @@ router.post("/", async (request, response) => {
 });
 
 //update user on cloud
-router.patch("/:id", async (request, response) => {
+router.patch("/:id", auth, async (request, response) => {
   const { id } = request.params;
   const client = await createConnection();
   const newData = request.body;
@@ -38,7 +39,7 @@ router.patch("/:id", async (request, response) => {
 });
 
 //delete user on cloud
-router.delete("/:id", async (request, response) => {
+router.delete("/:id", auth, async (request, response) => {
   const { id } = request.params;
   const client = await createConnection();
   const deleteuser = await delUser(client, id);

@@ -3,6 +3,7 @@ import express from "express";
 import { MongoClient } from "mongodb";
 import { managerRouter } from "./routes/managers.js";
 import { userRouter } from "./routes/users.js";
+
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT;
@@ -10,7 +11,7 @@ app.use(express.json());
 
 export async function createConnection() {
   const MONGO_URL = process.env.MONGO_URL;
-//   const MONGO_URL = "mongodb://localhost/users";
+  // const MONGO_URL = "mongodb://localhost/users";
 
   const client = new MongoClient(MONGO_URL);
   await client.connect();

@@ -1,8 +1,11 @@
 import { getManagers, getPassword } from "../helper.js";
 import express from "express";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 import { createConnection } from "../index.js";
 const router = express.Router();
+dotenv.config();
 
 // get manager on local
 router.get("/", async (request, response) => {
@@ -31,6 +34,13 @@ router.post("/login", async (request, response) => {
     .collection("managers")
     .findOne({ username: username });
   const passwordMatched = await bcrypt.compare(password,result.password);
-  response.send(passwordMatched ? "login successful" : "login failed");
+  if(passwordMatched)  {
+    const token = jwt.sign({id: result._id}, process.env.SECRET_KEY);
+    response.send({message : "login success", token: token});
+  }
+  else{
+    response.send({message : "login failed"});
+  }
+  // response.send(passwordMatched ? {message: "login successful"} : {message: "login failed"});
 });
 export const managerRouter = router;
