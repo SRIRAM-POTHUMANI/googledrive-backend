@@ -18,6 +18,19 @@ export async function addUser(client, addUsers) {
   .collection("people")
   .insertMany(addUsers);
 }
+export async function addMovies(client, movieDetails) {
+  return await client
+  .db("users")
+  .collection("movies")
+  .insertMany(movieDetails);
+}
+export async function getMovies(client) {
+  return await client
+  .db("users")
+  .collection("movies")
+  .find({})
+  .toArray();
+}
 export async function getUsers(client) {
   return await client
   .db("users")
@@ -25,6 +38,7 @@ export async function getUsers(client) {
   .find({})
   .toArray();
 }
+
 export async function getUsersbyid(client, id) {
   return await client
   .db("users")
