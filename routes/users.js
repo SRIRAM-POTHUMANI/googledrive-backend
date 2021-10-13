@@ -23,7 +23,7 @@ router.get("/:username", async (request, response) => {
 //create user to cloud
 router.post("/", async (request, response) => {
   const client = await createConnection();
-  const addUsers = request.body;
+  const addUsers = request.newNote;
   const result = await addUser(client, addUsers);
   response.send(result);
 });
