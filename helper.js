@@ -5,55 +5,34 @@ export async function getPassword(password) {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
 }
-export async function getManagers(client) {
-  return await client
-  .db("users")
-  .collection("managers")
-  .find({})
-  .toArray();
-}
 export async function addUser(client, addUsers) {
   return await client
-  .db("users")
-  .collection("people")
+  .db("googledrive")
+  .collection("users")
   .insertMany(addUsers);
-}
-export async function addMovies(client, movieDetails) {
-  return await client
-  .db("users")
-  .collection("movies")
-  .insertMany(movieDetails);
-}
-export async function getMovies(client) {
-  return await client
-  .db("users")
-  .collection("movies")
-  .find({})
-  .toArray();
 }
 export async function getUsers(client) {
   return await client
-  .db("users")
-  .collection("people")
+  .db("googledrive")
+  .collection("users")
   .find({})
   .toArray();
 }
-
-export async function getUsersbyid(client, id) {
+export async function getUsersbyid(client, username) {
   return await client
-  .db("users")
-  .collection("people")
-  .findOne({ id: id });
+  .db("googledrive")
+  .collection("users")
+  .findOne({ username: username });
 }
-export async function updateUser(client, id, newData) {
+export async function updateUser(client, username, newData) {
   return await client
-    .db("users")
-    .collection("people")
-    .updateOne({ id: id }, { $set: newData });
+    .db("googledrive")
+    .collection("users")
+    .updateOne({ username: username }, { $set: newData });
 }
-export async function delUser(client, id) {
+export async function delUser(client, username) {
   return await client
-  .db("users")
-  .collection("people")
-  .deleteOne({ id: id });
+  .db("googledrive")
+  .collection("users")
+  .deleteOne({ username: username });
 }

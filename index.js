@@ -3,9 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import { MongoClient } from "mongodb";
-import { managerRouter } from "./routes/managers.js";
 import { userRouter } from "./routes/users.js";
-import { movieRouter } from "./routes/movies.js";
 
 const app = express();
 dotenv.config();
@@ -21,17 +19,14 @@ export async function createConnection() {
   const client = new MongoClient(MONGO_URL);
   await client.connect();
   console.log("Successfull 💚");
-  // const insertData = await client.db("users").collec tion("people").insertMany(users);
+  // const insertData = await client.db("googledrive").collection("users").insertMany(users);
   return client;
 }
 createConnection();
 
 app.get("/", (request, response) => {
-  response.send("Hello,Welcome to Cloud env...:)");
+  response.send("Hello, Welcome to Hackathon...:)");
 });
-
-app.use("/manager", managerRouter);
-app.use("/movies", movieRouter);
 app.use("/users", userRouter);
 
 app.listen(PORT, () => console.log("Our Server Started on Port: ", PORT));
