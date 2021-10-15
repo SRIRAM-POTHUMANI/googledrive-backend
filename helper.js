@@ -9,7 +9,7 @@ export async function addUser(client, addUsers) {
   return await client
   .db("googledrive")
   .collection("users")
-  .insertMany(addUsers);
+  .insertOne(addUsers);
 }
 export async function getUsers(client) {
   return await client

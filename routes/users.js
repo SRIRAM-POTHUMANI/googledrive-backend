@@ -24,7 +24,7 @@ router.get("/:username", async (request, response) => {
 router.post("/", async (request, response) => {
   console.log(request.body);
   const client = await createConnection();
-  const addUsers = request.newNote;
+  const addUsers = request.body;
   const result = await addUser(client, addUsers);
   response.send(result);
 });
