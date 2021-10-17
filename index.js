@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import express from "express";
 import { MongoClient } from "mongodb";
 import { userRouter } from "./routes/users.js";
+import { userfilesRouter } from "./routes/userfiles.js";
 
 const app = express();
 dotenv.config();
@@ -28,5 +29,5 @@ app.get("/", (request, response) => {
   response.send("Hello, Welcome to Hackathon...:)");
 });
 app.use("/users", userRouter);
-
+app.use("/userfiles", userfilesRouter);
 app.listen(PORT, () => console.log("Our Server Started on Port: ", PORT));

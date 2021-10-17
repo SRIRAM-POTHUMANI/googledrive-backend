@@ -9,7 +9,7 @@ export async function addUser(client, addUsers) {
   return await client
   .db("googledrive")
   .collection("users")
-  .insertOne(addUsers);
+  .insertMany(addUsers);
 }
 export async function getUsers(client) {
   return await client
@@ -35,4 +35,39 @@ export async function delUser(client, username) {
   .db("googledrive")
   .collection("users")
   .deleteOne({ username: username });
+}
+
+
+//files
+
+export async function addfiles(client, addFiles) {
+  return await client
+  .db("googledrive")
+  .collection("userfiles")
+  .insertOne(addFiles);
+}
+export async function getUserfiles(client) {
+  return await client
+  .db("googledrive")
+  .collection("userfiles")
+  .find({})
+  .toArray();
+}
+export async function getUserfilesbyname(client, filename) {
+  return await client
+  .db("googledrive")
+  .collection("userfiles")
+  .findOne({ filename: filename });
+}
+export async function updatefiles(client, filename, newData) {
+  return await client
+    .db("googledrive")
+    .collection("userfiles")
+    .updateOne({ filename: filename }, { $set: newData });
+}
+export async function delfiles(client, filename) {
+  return await client
+  .db("googledrive")
+  .collection("userfiles")
+  .deleteOne({ filename: filename });
 }
